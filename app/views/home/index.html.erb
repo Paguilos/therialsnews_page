@@ -1,0 +1,13 @@
+<div class="container">
+    <% if user_signed_in? %>  
+        <% if current_user.username %>  
+            <h1>Bienvenido <%= current_user.username %> a TheRialNews</h1>
+            <% else %>
+            <h1>Bienvenido <%= current_user.email%> a TheRialNews</h1>
+        <% end %>    
+            <p class="subtitulo fs-3">Tu portal de noticias</p>               
+    <% else %>    
+        <h1>Bienvenido a TheRialsNews</h1>    
+        <h5>Comenta nuestra noticias resgitrándote o logueandote!!!</h5> 
+    <% end %>  
+</div>  
