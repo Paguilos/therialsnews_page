@@ -9,5 +9,6 @@
     <% else %>    
         <h1>Bienvenido a TheRialsNews</h1>    
         <h5>Comenta nuestra noticias resgitrándote o logueandote!!!</h5> 
-    <% end %>  
+    <% end %>      
+    <%= render partial: 'notes/index', locals: { note: @note } %> 
 </div>  

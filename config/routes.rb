@@ -5,7 +5,9 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
     registrations: 'users/registrations'
    }
-   
+
+   delete 'notes/:id', to: 'notes#destroy', as: 'delete_note'
+   get 'notes', to: 'notes#index', as: 'index_note'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

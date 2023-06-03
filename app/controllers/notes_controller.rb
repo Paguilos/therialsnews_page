@@ -1,8 +1,7 @@
 class NotesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :authorize_admin, only: [:new, :create, :update, :edit, :destroy]
- 
-  before_action :set_note, only: %i[ show edit update destroy ]
+  before_action :authorize_admin, only: [:new, :create, :update, :edit, :destroy] 
+  before_action :set_note, only: [:show, :edit, :update, :destroy]
   # before_action only: [:new, :create, :update, :edit, :destroy] do
   #   authorize_request(["admin"])
   #  end
@@ -10,16 +9,18 @@ class NotesController < ApplicationController
 
   # GET /notes or /notes.json
   def index
-    @notes = Note.all
+    @notes = Note.all         
   end
 
   # GET /notes/1 or /notes/1.json
-  def show
+  def show       
+    
   end
 
   # GET /notes/new
   def new
     @note = Note.new
+   
   end
 
   # GET /notes/1/edit
@@ -28,26 +29,28 @@ class NotesController < ApplicationController
 
   # POST /notes or /notes.json
   def create
-    
-    @note = Note.new(note_params)
-    @note.user = current_user #o @note.user_id = current_user.id
+    @note = Note.new(note_params)   
+    @note.user = current_user
 
-    respond_to do |format|
-      if @note.save
-        format.html { redirect_to note_url(@note), notice: "Note was successfully created." }
-        format.json { render :show, status: :created, location: @note }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @note.errors, status: :unprocessable_entity }
-      end
-    end
+      
+    
+
+      respond_to do |format|
+        if @note.save
+          format.html { redirect_to @note, notice: "Noticia creada exitosamente." }
+          format.json { render :show, status: :created, location: @note }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @note.errors, status: :unprocessable_entity }
+        end
+      end   
   end
 
   # PATCH/PUT /notes/1 or /notes/1.json
   def update
     respond_to do |format|
       if @note.update(note_params)
-        format.html { redirect_to note_url(@note), notice: "Note was successfully updated." }
+        format.html { redirect_to @note, notice: "Noticia actualizada exitosamente." }
         format.json { render :show, status: :ok, location: @note }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -61,7 +64,7 @@ class NotesController < ApplicationController
     @note.destroy
 
     respond_to do |format|
-      format.html { redirect_to notes_url, notice: "Note was successfully destroyed." }
+      format.html { redirect_to home_index_path, notice: "Noticia eliminada exitosamente." }
       format.json { head :no_content }
     end
   end
@@ -74,6 +77,12 @@ class NotesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def note_params
-      params.require(:note).permit(:image, :title, :content)
+      params.require(:note).permit(:title, :content, :image)
+    end
+
+    def authorize_admin
+      unless current_user.admin?
+        redirect_to notes_path, notice: "No estás autorizado a crear noticias ."
+      end
     end
 end
