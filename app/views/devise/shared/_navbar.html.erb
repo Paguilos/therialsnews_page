@@ -12,9 +12,9 @@
             <%= link_to "Cerrar sesión",destroy_user_session_path, meethod: :get,  class: "nav-link" %>
 
             <% if current_user.admin? %>                 
-              <%# <%= link_to "Noticias", notes_path, class: "nav-link" %> %>
+              <%# <%= link_to "Noticias", notes_path, class: "nav-link" %>
               <%= link_to "Crear Noticia", new_note_path,  class: "nav-link" %>
-              <%= link_to "Ver Comentarios", comments_path,  class: "nav-link" %>
+              <%# <%= link_to "Ver Comentarios", note_comment_path,  class: "nav-link" %> 
             <% end %>
                
           <% else %>      
