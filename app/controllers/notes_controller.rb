@@ -14,7 +14,8 @@ class NotesController < ApplicationController
 
   # GET /notes/1 or /notes/1.json
   def show       
-    
+    @note = Note.find(params[:id])
+    @comments = @note.comments
   end
 
   # GET /notes/new
@@ -30,10 +31,7 @@ class NotesController < ApplicationController
   # POST /notes or /notes.json
   def create
     @note = Note.new(note_params)   
-    @note.user = current_user
-
-      
-    
+    @note.user = current_user   
 
       respond_to do |format|
         if @note.save

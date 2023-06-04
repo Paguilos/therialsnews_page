@@ -3,8 +3,29 @@
 <%= render partial: 'note', locals: { note: @note } %>
 
 <div>
-  <%= link_to "Edit this note", edit_note_path(@note) %> |
+
+<% if current_user.admin? %> 
+   <%= link_to "Edit this note", edit_note_path(@note) %> |
+   <%= button_to "Destroy this note", delete_note_path(@note), method: :delete %>
+<%end%>
+
+<% if user_signed_in? %>   
+   <%= link_to "Comentar", new_note_comment_path(@note) %>
+<%end%>
+
   <%= link_to "Back to notes", home_index_path %>
 
-  <%= button_to "Destroy this note", delete_note_path(@note), method: :delete %>
+<div id="comments">
+  <% @comments.each do |comment| %>
+    <%= render comment %>
+    <p>
+      <%= link_to "Ver", note_comment_path(@note, comment) %>
+    </p>
+  <% end %>
+</div>
+
+  
+
+
+ 
 </div>
