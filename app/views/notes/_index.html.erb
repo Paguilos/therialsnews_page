@@ -1,31 +1,11 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Notes</h1>
 
-<div id="notes">
-  <% @notes.each do |note| %>
-    <%= render note %>
-    <p>
-      <%= link_to "Show this note", note %>
-    </p>
+<div id="notes" class="row row-cols-1 row-cols-md-3 g-4">
+  <% @notes.each do |note| %> 
+    <div class="col"> 
+      <%= render note %>          
+    </div>
+  </div>
   <% end %>
 </div>
-
-<%= link_to "New note", new_note_path %>
-
-
-
-<%# <p style="color: green"><%= notice %></p>         %>
-<%# <% @notes.each do |note| %><br/>      %>
-  <%# <div class="row row-cols-1 row-cols-md-3 g-4">  %>
-    <%# <div class="col">                %>
-      <%# <%= render partial: 'notes/note', locals: { note: @note } %>    %>
-    <%# </div>   %>
-  <%# </div>                      %>
-<%# <% end %> %>
-
-<%# <% if current_user.admin? %>                  %>
-   <%# <%= link_to "Nueva noticia", new_note_path, class: "nav-link" %>   %>
-<%# <% end %>        %>
-
-

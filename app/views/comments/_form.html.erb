@@ -11,20 +11,22 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :content, style: "display: block" %>
-    <%= form.text_area :content %>
-  </div>
+  <div class="container mt-5">
+    <div>
+      <%= form.label :content, style: "display: block", class:"form-label" %>
+      <%= form.text_area :content, class:"form-control" %>
+    </div>
 
-  <div>
-     <%=form.hidden_field current_user.id %>
-  </div>
+    <div>
+      <%=form.hidden_field current_user.id %>
+    </div>
 
-  <div>
-     <%= form.hidden_field :note_id, value: @note.id  %>
-  </div>
+    <div>
+      <%= form.hidden_field :note_id, value: @note.id  %>
+    </div>
 
-  <div>
-    <%= form.submit %>
+    <div>
+      <%= form.submit %>
+    </div>
   </div>
 <% end %>

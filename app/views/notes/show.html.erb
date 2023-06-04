@@ -1,31 +1,32 @@
-<p style="color: green"><%= notice %></p>
+<div class="container">
+  <p style="color: green"><%= notice %></p>
 
-<%= render partial: 'note', locals: { note: @note } %>
+  <%= render partial: 'note', locals: { note: @note } %>
 
-<div>
-
-<% if current_user.admin? %> 
-   <%= link_to "Edit this note", edit_note_path(@note) %> |
-   <%= button_to "Destroy this note", delete_note_path(@note), method: :delete %>
-<%end%>
-
-<% if user_signed_in? %>   
-   <%= link_to "Comentar", new_note_comment_path(@note) %>
-<%end%>
-
-  <%= link_to "Back to notes", home_index_path %>
-
-<div id="comments">
-  <% @comments.each do |comment| %>
-    <%= render comment %>
-    <p>
-      <%= link_to "Ver", note_comment_path(@note, comment) %>
-    </p>
-  <% end %>
-</div>
-
+ <nav class="nav">
   
 
+    <% if current_user.admin? %> 
+      <%= button_to "Eliminar", delete_note_path(@note), method: :delete, class: "nav-link" %>
+      <%= link_to "Editar", edit_note_path(@note), class: "nav-link"%>      
+    <%end%>
+    <% if user_signed_in? %>   
+      <%= link_to "Comentar", new_note_comment_path(@note), class: "nav-link" %>
+    <%end%>   
+   
 
+      <%= link_to "Volver a noticias", home_index_path, class: "nav-link" %>
+ </nav>
  
+  <div class="container mt-5">
+    <h5>Comentarios</h5><br/>
+      <div id="comments">
+        <% @comments.each do |comment| %>
+          <%= render comment %>
+          <p>
+            <%= link_to "Ver", note_comment_path(@note, comment), class: "nav-link" %>
+          </p>
+        <% end %>
+      </div> 
+  </div>  
 </div>
